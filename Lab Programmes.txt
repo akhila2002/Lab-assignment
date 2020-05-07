@@ -1,0 +1,207 @@
+                                                                                                           Akhila Nathani
+                                                                                                           AP19110010322
+                                                                                                             CSE - H
+
+1. Write a program for the Insertion sort algorithm.
+#include <stdio.h> 
+void main()
+{
+  int n, array[1000], c, d, t;
+  printf("Enter number of elements\n");
+  scanf("%d", &n);
+  printf("Enter %d integers\n", n);
+  for (c = 0; c < n; c++)
+    scanf("%d", &array[c]);
+  for (c = 1 ; c <= n - 1; c++) {
+    d = c;
+ 
+    while ( d > 0 && array[d-1] > array[d]) {
+      t          = array[d];
+      array[d]   = array[d-1];
+      array[d-1] = t;
+ 
+      d--;
+    }
+  }
+ 
+  printf("Sorted array in ascending order:\n");
+  for (c = 0; c <= n - 1; c++) {
+    printf("%d\n", array[c]);
+  }
+}
+
+OUTPUT :
+Enter number of elements
+5
+Enter 5 integers
+22
+6
+44
+88
+3
+Sorted array in ascending order :
+3
+6
+22
+44
+88
+
+
+2. Write a program for the Selection sort algorithm.
+#include <stdio.h>
+void main()
+{
+  int array[100], n, c, d, position, temp;
+  printf("Enter number of elements\n");
+  scanf("%d", &n);
+  printf("Enter %d integers\n", n);
+  for (c = 0; c < n; c++)
+    scanf("%d", &array[c]);
+
+  for (c = 0; c < (n - 1); c++)
+  {
+    position = c;
+   
+    for (d = c + 1; d < n; d++)
+    {
+      if (array[position] > array[d])
+        position = d;
+    }
+    if (position != c)
+    {
+      temp = array[c];
+      array[c] = array[position];
+      array[position] = temp;
+    }
+  }
+ 
+  printf("Sorted array in ascending order:\n");
+ 
+  for (c = 0; c < n; c++)
+    printf("%d\n", array[c]);
+}
+
+OUTPUT :
+Enter number of elements
+5
+Enter 5 integers
+1
+6
+99
+5
+66
+Sorted array in ascending order :
+1
+5
+6
+66
+99
+
+
+3. Write a program for Bubble sort algorithm.
+#include <stdio.h> 
+void main()
+{
+  int array[100], n, c, d, temp;
+  printf("Enter number of elements\n");
+  scanf("%d", &n);
+  printf("Enter %d integers\n", n);
+  for (c = 0; c < n; c++)
+    scanf("%d", &array[c]);
+ 
+  for (c = 0 ; c < n - 1; c++)
+  {
+    for (d = 0 ; d < n - c - 1; d++)
+    {
+      if (array[d] > array[d+1]) /* For decreasing order use < */
+      {
+        temp       = array[d];
+        array[d]   = array[d+1];
+        array[d+1] = temp;
+      }
+    }
+  }
+  printf("Sorted list in ascending order:\n");
+  for (c = 0; c < n; c++)
+     printf("%d\n", array[c]);
+}
+
+OUTPUT :
+Enter number of elements
+5
+Enter 5 integers
+44
+12
+88
+18
+0
+Sorted list in ascending order:
+0
+12
+18
+44
+88
+
+
+4. Write a program for the Merge sort algorithm.
+#include <stdio.h>
+
+#define max 10
+
+int a[11] = { 10, 14, 19, 26, 27, 31, 33, 35, 42, 44, 0 };
+int b[10];
+
+void merging(int low, int mid, int high) {
+   int l1, l2, i;
+
+   for(l1 = low, l2 = mid + 1, i = low; l1 <= mid && l2 <= high; i++) {
+      if(a[l1] <= a[l2])
+         b[i] = a[l1++];
+      else
+         b[i] = a[l2++];
+   }
+   
+   while(l1 <= mid)    
+      b[i++] = a[l1++];
+
+   while(l2 <= high)   
+      b[i++] = a[l2++];
+
+   for(i = low; i <= high; i++)
+      a[i] = b[i];
+}
+
+void sort(int low, int high) {
+   int mid;
+   
+   if(low < high) {
+      mid = (low + high) / 2;
+      sort(low, mid);
+      sort(mid+1, high);
+      merging(low, mid, high);
+   } else { 
+      return;
+   }   
+}
+
+int main() { 
+   int i;
+
+   printf("List before sorting\n");
+   
+   for(i = 0; i <= max; i++)
+      printf("%d ", a[i]);
+
+   sort(0, max);
+
+   printf("\nList after sorting\n");
+   
+   for(i = 0; i <= max; i++)
+      printf("%d ", a[i]);
+}
+
+OUTPUT :
+List before sorting
+10 14 19 26 27 31 33 35 42 44 0
+List after sorting
+0 10 14 19 26 27 31 33 35 42 44
